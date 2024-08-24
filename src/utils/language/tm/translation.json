@@ -1,0 +1,53 @@
+{
+  "sidebar": {
+    "dashboard": "Daşbord",
+    "clients": "Müşderiler",
+    "smsLogs": "SMS Günlükleri",
+    "blacklistWords": "Gadagan edilen sözler",
+    "licenses": "Lisenziýalar"
+  },
+
+  "lang": {
+    "languageChanged": "Dil Türkmen diline geçirildi"
+  },
+
+  "dashboard": {
+    "clients": "Müşderiler",
+    "danger": "Haryt",
+    "blacklistWords": "Gadagan sözler",
+    "phoneNumbers": "Telefon sany"
+  },
+
+  "clients": {
+    "name": "Ady",
+    "clientName": "Müşderiniň Ady",
+    "phoneCount": "Telefon sany",
+    "usagePeriod": "Işletmek döwri",
+    "status": "Status",
+    "action": "Amal"
+  },
+
+  "smslogs": {
+    "name": "Ady",
+    "todaySmsCount": "Bugünkü SMS sany",
+    "totalSmsCount": "Jemi SMS sany",
+    "dangerCount": "Gorkunç hasap",
+    "statusBased": "Status boýunça"
+  },
+
+  "blacklist": {
+    "word": "Söz",
+    "identifiedCases": "Anyklanan ýagdaýlar",
+    "date": "Doredilen senesi",
+    "action": "Amal"
+  },
+
+  "license": {
+    "clientName": "Müşderi Ady",
+    "licenseKey": "Lisenziýa Kody",
+    "phoneLimit": "Telefon Sany",
+    "usagePeriod": "Ulanylma Periody",
+    "status": "Status",
+    "action": "Amal"
+  }
+}

@@ -1,7 +1,8 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { Table, Button } from "antd";
+import { Table, Button, Modal } from "antd";
 import { AiFillDelete } from "react-icons/ai"; // Import delete icon
+import { useTranslation } from "react-i18next";
 
 // Styled container for the table
 const TableContainer = styled.div`
@@ -28,7 +29,8 @@ const TableContainer = styled.div`
 `;
 
 const BlacklistTable: FC = () => {
-  // Define static data for the table
+  const { t } = useTranslation();
+
   const dataSource = [
     {
       key: "1",
@@ -42,35 +44,58 @@ const BlacklistTable: FC = () => {
       identifiedCases: "Case 3",
       date: "2024-08-22",
     },
-    // Add more data as needed
   ];
 
-  // Define table columns
   const columns = [
-    { title: "Word", dataIndex: "word", key: "word" },
     {
-      title: "Anyklanan yagdaylar",
+      title: t("blacklist.word"),
+      dataIndex: "word",
+      key: "word",
+    },
+    {
+      title: t("blacklist.identifiedCases"),
       dataIndex: "identifiedCases",
       key: "identifiedCases",
     },
-    { title: "Doredilen senesi", dataIndex: "date", key: "date" },
     {
-      title: "Action",
+      title: t("blacklist.date"),
+      dataIndex: "date",
+      key: "date",
+    },
+    {
+      title: t("blacklist.action"),
       key: "action",
       render: (_: any, record: any) => (
         <Button
           icon={<AiFillDelete className="delete-icon" />}
-          onClick={() => handleDelete(record.key)}
+          onClick={() => showDeleteConfirm(record.key)}
           type="text"
         />
       ),
     },
   ];
 
+  // Function to show the delete confirmation popup
+  const showDeleteConfirm = (key: string) => {
+    Modal.confirm({
+      title: "Are you sure you want to delete this item?",
+      content: "This action cannot be undone.",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        handleDelete(key);
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
   // Handle delete action
   const handleDelete = (key: string) => {
     console.log(`Delete record with key: ${key}`);
-    // Implement delete logic here
+    // Implement delete logic here, such as updating state or making an API call
   };
 
   return (

@@ -15,20 +15,19 @@ const DetailsContainer = styled.div`
   }
 
   .ant-table-tbody > tr.status-Sending {
-    background-color: orange; // Light orange
+    background-color: white; // Light orange
   }
 
   .ant-table-tbody > tr.status-Canceled {
-    background-color: #ffebee; // Light red
+    background-color: #ff9f9f; // Light red
   }
 
   .ant-table-tbody > tr.status-Done {
-    background-color: green; // Light green
-    color: white;
+    background-color: white; // Light green
   }
 
   .ant-table-tbody > tr.status-Errored {
-    background-color: red; // Light red
+    background-color: #fab246; // Light red
   }
 
   .back-icon {

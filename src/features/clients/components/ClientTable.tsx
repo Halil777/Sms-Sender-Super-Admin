@@ -1,6 +1,8 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Modal } from "antd";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 // Table container with scrollable body
 const TableContainer = styled.div`
@@ -131,17 +133,36 @@ const data = [
 ];
 
 const ClientTable: FC = () => {
+  const { t } = useTranslation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedClient, setSelectedClient] = useState<number | null>(null);
+
+  const showDeleteModal = (id: number) => {
+    setSelectedClient(id);
+    setIsModalVisible(true);
+  };
+
+  const handleDelete = () => {
+    console.log("Delete client with id:", selectedClient);
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setSelectedClient(null);
+  };
+
   return (
     <TableContainer>
       <Table>
         <thead>
           <tr>
-            <TableHeader>Name</TableHeader>
-            <TableHeader>Client Name</TableHeader>
-            <TableHeader>Phone Count</TableHeader>
-            <TableHeader>Useful Duration</TableHeader>
-            <TableHeader>Status</TableHeader>
-            <TableHeader>Action</TableHeader>
+            <TableHeader>{t("clients.name")}</TableHeader>
+            <TableHeader>{t("clients.clientName")}</TableHeader>
+            <TableHeader>{t("clients.phoneCount")}</TableHeader>
+            <TableHeader>{t("clients.usagePeriod")}</TableHeader>
+            <TableHeader>{t("clients.status")}</TableHeader>
+            <TableHeader>{t("clients.action")}</TableHeader>
           </tr>
         </thead>
         <tbody>
@@ -160,8 +181,11 @@ const ClientTable: FC = () => {
               </TableCell>
               <TableCell>
                 <ActionIcon>
-                  <EditOutlined style={{ color: "#1A54EB" }} />
-                  <DeleteOutlined style={{ color: "#FF3521" }} />
+                  <FaEdit style={{ color: "#1A54EB" }} />
+                  <FaTrash
+                    style={{ color: "#FF3521" }}
+                    onClick={() => showDeleteModal(client.id)}
+                  />
                 </ActionIcon>
               </TableCell>
             </TableRow>
@@ -169,6 +193,17 @@ const ClientTable: FC = () => {
         </tbody>
       </Table>
       <ScrollBar />
+
+      <Modal
+        title="Delete Client"
+        visible={isModalVisible}
+        onOk={handleDelete}
+        onCancel={handleCancel}
+        okText="Delete"
+        okButtonProps={{ danger: true }}
+      >
+        <p>Are you sure you want to delete this client?</p>
+      </Modal>
     </TableContainer>
   );
 };

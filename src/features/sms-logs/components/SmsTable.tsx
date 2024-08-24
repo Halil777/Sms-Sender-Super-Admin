@@ -1,26 +1,37 @@
 import { FC } from "react";
 import { StyledTable, TableContainer } from "../style/SmsStyle";
+import { useTranslation } from "react-i18next";
 
 interface SmsTableProps {
   onRowClick: (item: any) => void;
 }
 
 const SmsTable: FC<SmsTableProps> = ({ onRowClick }) => {
+  const { t } = useTranslation();
+
   const columns = [
-    { title: "Ady", dataIndex: "name", key: "name" },
     {
-      title: "Şu günki SMS sany",
+      title: t("smslogs.name"),
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: t("smslogs.todaySmsCount"),
       dataIndex: "todaySmsCount",
       key: "todaySmsCount",
     },
     {
-      title: "Umumy SMS sany",
+      title: t("smslogs.totalSmsCount"),
       dataIndex: "totalSmsCount",
       key: "totalSmsCount",
     },
-    { title: "Danger count", dataIndex: "dangerCount", key: "dangerCount" },
     {
-      title: "Status boýunça",
+      title: t("smslogs.dangerCount"),
+      dataIndex: "dangerCount",
+      key: "dangerCount",
+    },
+    {
+      title: t("smslogs.statusBased"),
       dataIndex: "status",
       key: "status",
       render: (text: string, record: any) => (

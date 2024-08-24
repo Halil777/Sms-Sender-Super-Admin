@@ -1,7 +1,8 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { Table } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Table, Modal } from "antd";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai"; // Import icons from react-icons
+import { useTranslation } from "react-i18next";
 
 // Define styled components
 const TableContainer = styled.div`
@@ -18,16 +19,14 @@ const ActionIcon = styled.div`
   cursor: pointer;
   margin: 0 5px;
 
-  .anticon {
-    font-size: 18px;
-  }
-
   .edit-icon {
     color: #1a54eb;
+    font-size: 18px;
   }
 
   .delete-icon {
     color: red;
+    font-size: 18px;
   }
 `;
 
@@ -53,59 +52,94 @@ const StatusDiv = styled.div<{ status: string }>`
   cursor: default;
 `;
 
-const columns = [
-  { title: "Client Name", dataIndex: "clientName", key: "clientName" },
-  { title: "License Key", dataIndex: "licenseKey", key: "licenseKey" },
-  { title: "Phone Limit", dataIndex: "phoneLimit", key: "phoneLimit" },
-  { title: "Usage Period", dataIndex: "usagePeriod", key: "usagePeriod" },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-    render: (status: string) => (
-      <StatusDiv status={status}>
-        {status.charAt(0).toUpperCase() + status.slice(1)}
-      </StatusDiv>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <div style={{ display: "flex" }}>
-        <ActionIcon className="edit-icon">
-          <EditOutlined />
-        </ActionIcon>
-        <ActionIcon className="delete-icon">
-          <DeleteOutlined />
-        </ActionIcon>
-      </div>
-    ),
-  },
-];
-
-// Sample data for the table
-const data = [
-  {
-    key: "1",
-    clientName: "Client A",
-    licenseKey: "ABCD1234",
-    phoneLimit: 100,
-    usagePeriod: "2024-01-01 to 2024-12-31",
-    status: "active",
-  },
-  {
-    key: "2",
-    clientName: "Client B",
-    licenseKey: "EFGH5678",
-    phoneLimit: 50,
-    usagePeriod: "2024-01-01 to 2024-06-30",
-    status: "pending",
-  },
-  // Add more rows as needed
-];
-
 const LicensesTable: FC = () => {
+  const { t } = useTranslation();
+
+  const handleDelete = (key: string) => {
+    Modal.confirm({
+      title: "Are you sure you want to delete this item?",
+      content: "This action cannot be undone.",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        console.log(`Delete record with key: ${key}`);
+        // Implement delete logic here
+      },
+    });
+  };
+
+  const columns = [
+    {
+      title: t("license.clientName"),
+      dataIndex: "clientName",
+      key: "clientName",
+    },
+    {
+      title: t("license.licenseKey"),
+      dataIndex: "licenseKey",
+      key: "licenseKey",
+    },
+    {
+      title: t("license.phoneLimit"),
+      dataIndex: "phoneLimit",
+      key: "phoneLimit",
+    },
+    {
+      title: t("license.usagePeriod"),
+      dataIndex: "usagePeriod",
+      key: "usagePeriod",
+    },
+    {
+      title: t("license.status"),
+      dataIndex: "status",
+      key: "status",
+      render: (status: string) => (
+        <StatusDiv status={status}>
+          {status.charAt(0).toUpperCase() + status.slice(1)}
+        </StatusDiv>
+      ),
+    },
+    {
+      title: t("license.action"),
+      key: "action",
+      render: (_: any, record: any) => (
+        <div style={{ display: "flex" }}>
+          <ActionIcon className="edit-icon">
+            <AiFillEdit className="edit-icon" />
+          </ActionIcon>
+          <ActionIcon
+            className="delete-icon"
+            onClick={() => handleDelete(record.key)}
+          >
+            <AiFillDelete className="delete-icon" />
+          </ActionIcon>
+        </div>
+      ),
+    },
+  ];
+
+  // Sample data for the table
+  const data = [
+    {
+      key: "1",
+      clientName: "Client A",
+      licenseKey: "ABCD1234",
+      phoneLimit: 100,
+      usagePeriod: "2024-01-01 to 2024-12-31",
+      status: "active",
+    },
+    {
+      key: "2",
+      clientName: "Client B",
+      licenseKey: "EFGH5678",
+      phoneLimit: 50,
+      usagePeriod: "2024-01-01 to 2024-06-30",
+      status: "pending",
+    },
+    // Add more rows as needed
+  ];
+
   return (
     <TableContainer>
       <Table

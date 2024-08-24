@@ -10,6 +10,7 @@ import {
   UserIconContainer,
   WelcomeText,
 } from "./headerStyle";
+import Language from "../../utils/language/Language";
 
 const Header: FC = () => {
   const location = useLocation();
@@ -48,6 +49,7 @@ const Header: FC = () => {
         <WelcomeText>Welcome back to {getPageName()}.</WelcomeText>
       </LeftContainer>
       <RightContainer>
+        <Language />
         <UserIconContainer>
           {avatar ? (
             <Avatar

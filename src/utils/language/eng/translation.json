@@ -1,0 +1,53 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "smsLogs": "SMS Logs",
+    "blacklistWords": "Blacklist Words",
+    "licenses": "Licenses"
+  },
+
+  "lang": {
+    "languageChanged": "Language changed to English"
+  },
+
+  "dashboard": {
+    "clients": "Clients",
+    "danger": "Danger",
+    "blacklistWords": "Blacklist Words",
+    "phoneNumbers": "Phone Count"
+  },
+
+  "clients": {
+    "name": "Name",
+    "clientName": "Client Name",
+    "phoneCount": "Phone Count",
+    "usagePeriod": "Usage Period",
+    "status": "Status",
+    "action": "Action"
+  },
+
+  "smslogs": {
+    "name": "Name",
+    "todaySmsCount": "Today's SMS Count",
+    "totalSmsCount": "Total SMS Count",
+    "dangerCount": "Danger Count",
+    "statusBased": "Status Based"
+  },
+
+  "blacklist": {
+    "word": "Word",
+    "identifiedCases": "Identified Cases",
+    "date": "Date Created",
+    "action": "Action"
+  },
+
+  "license": {
+    "clientName": "Client Name",
+    "licenseKey": "License Key",
+    "phoneLimit": "Phone Limit",
+    "usagePeriod": "Usage Period",
+    "status": "Status",
+    "action": "Action"
+  }
+}

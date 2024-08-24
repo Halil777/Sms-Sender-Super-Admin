@@ -37,6 +37,7 @@ export const WelcomeText = styled.p`
 export const RightContainer = styled.div`
   display: flex;
   align-items: center;
+  gap: 50px;
 `;
 
 export const UserIconContainer = styled.div`

@@ -8,6 +8,7 @@ import {
   StopOutlined,
   FileTextOutlined, // Import a new icon for Licenses
 } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 // Container for the sidebar with added box-shadow
 const SidebarContainer = styled.div`
@@ -69,6 +70,8 @@ const IconWrapper = styled.span<{ isActive: boolean }>`
 `;
 
 const Sidebar: FC = () => {
+  const { t } = useTranslation();
+
   return (
     <SidebarContainer>
       <SidebarTitle>Sms Sender</SidebarTitle>
@@ -79,7 +82,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <HomeOutlined />
         </IconWrapper>
-        Dashboard
+        {t("sidebar.dashboard")}
       </MenuItem>
       <MenuItem
         to="/clients"
@@ -88,7 +91,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <TeamOutlined />
         </IconWrapper>
-        Clients
+        {t("sidebar.clients")}
       </MenuItem>
       <MenuItem
         to="/sms-logs"
@@ -97,7 +100,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <MessageOutlined />
         </IconWrapper>
-        SMS Logs
+        {t("sidebar.smsLogs")}
       </MenuItem>
       <MenuItem
         to="/blacklist-words"
@@ -106,7 +109,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <StopOutlined />
         </IconWrapper>
-        Blacklist Words
+        {t("sidebar.blacklistWords")}
       </MenuItem>
       {/* Add Licenses page to the sidebar */}
       <MenuItem
@@ -116,7 +119,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <FileTextOutlined /> {/* Icon for Licenses */}
         </IconWrapper>
-        Licenses
+        {t("sidebar.licenses")}
       </MenuItem>
     </SidebarContainer>
   );

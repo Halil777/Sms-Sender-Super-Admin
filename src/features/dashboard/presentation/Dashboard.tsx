@@ -18,8 +18,10 @@ import {
   CardHeader,
 } from "../style/DashboardStyle";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next"; // Import useTranslation
 
 const Dashboard: React.FC = () => {
+  const { t } = useTranslation(); // Get translation function
   const data = useDashboardData();
 
   return (
@@ -28,25 +30,25 @@ const Dashboard: React.FC = () => {
         <>
           <DashboardCard
             icon={<UserOutlined />}
-            text="Clients"
+            text={t("dashboard.clients")} // Use translation
             count={data.clientsCount}
             delay={0}
           />
           <DashboardCard
             icon={<WarningOutlined />}
-            text="Danger"
+            text={t("dashboard.danger")} // Use translation
             count={data.dangerCount}
             delay={0.3}
           />
           <DashboardCard
             icon={<StopOutlined />}
-            text="Blacklist Words"
+            text={t("dashboard.blacklistWords")} // Use translation
             count={data.blacklistCount}
             delay={0.5}
           />
           <DashboardCard
             icon={<PhoneOutlined />}
-            text="Phone Numbers"
+            text={t("dashboard.phoneNumbers")} // Use translation
             count={data.phoneCount}
             delay={0.7}
           />
