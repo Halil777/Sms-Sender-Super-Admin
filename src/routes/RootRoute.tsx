@@ -1,7 +1,13 @@
-import { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Suspense, lazy, useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import styled from "styled-components";
 import Layout from "../components/sidebar/Layout";
+import Login from "../features/login/Login";
 
 // Lazy load components
 const Dashboard = lazy(
@@ -26,23 +32,100 @@ const AppContainer = styled.div`
   height: 100vh;
 `;
 
+// Function to check if the user is authenticated
+const isAuthenticated = (): boolean => {
+  // Check for a static value in localStorage
+  return localStorage.getItem("userLoggedIn") === "true";
+};
+
+// ProtectedRoute component to guard routes
+const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
+  return isAuthenticated() ? children : <Navigate to="/login" />;
+};
+
 function RootRoute() {
+  const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    // Simulate an authentication check
+    setAuthChecked(true);
+  }, []);
+
+  if (!authChecked) {
+    return <div>Loading...</div>; // Show loading until auth check is complete
+  }
+
   return (
     <Router>
-      <AppContainer>
-        <Layout>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/profile" element={<ProfileSettings />} />
-              <Route path="/clients" element={<Clients />} />
-              <Route path="/licences" element={<Licenses />} />
-              <Route path="/sms-logs" element={<SmsLogs />} />
-              <Route path="/blacklist-words" element={<BlackList />} />
-            </Routes>
-          </Suspense>
-        </Layout>
-      </AppContainer>
+      <Routes>
+        {/* Route for the Login component */}
+        <Route path="/login" element={<Login />} />
+
+        {/* All other routes are protected by Layout */}
+        <Route
+          path="/*" // Catch-all route for all other paths
+          element={
+            <AppContainer>
+              <Layout>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Routes>
+                    <Route
+                      path="/dashboard"
+                      element={
+                        <ProtectedRoute>
+                          <Dashboard />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/profile"
+                      element={
+                        <ProtectedRoute>
+                          <ProfileSettings />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/clients"
+                      element={
+                        <ProtectedRoute>
+                          <Clients />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/licenses"
+                      element={
+                        <ProtectedRoute>
+                          <Licenses />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/sms-logs"
+                      element={
+                        <ProtectedRoute>
+                          <SmsLogs />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/blacklist-words"
+                      element={
+                        <ProtectedRoute>
+                          <BlackList />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route path="/" element={<Navigate to="/login" />} />
+                    {/* Redirect to login */}
+                  </Routes>
+                </Suspense>
+              </Layout>
+            </AppContainer>
+          }
+        />
+      </Routes>
     </Router>
   );
 }
