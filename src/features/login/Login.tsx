@@ -11,7 +11,10 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     // Check credentials
-    if (phoneNumber === "+99363430338" && password === "12345!") {
+    if (
+      (phoneNumber === "+99363430338" && password === "12345!") ||
+      (phoneNumber === "+99362737222" && password === "sensei")
+    ) {
       localStorage.setItem("userLoggedIn", "true"); // Set the static value
       navigate("/dashboard");
     } else {
