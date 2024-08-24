@@ -49,5 +49,21 @@
     "usagePeriod": "Ulanylma Periody",
     "status": "Status",
     "action": "Amal"
+  },
+
+  "profile": {
+    "userDetails": "Ulanyjy Maglumatlary",
+    "changePicture": "Suraty Çalyş",
+    "firstName": "Ady",
+    "surname": "Familiýasy",
+    "email": "E-poçta",
+    "about": "Özüňiz hakda maglumat paýlaşyň",
+    "cancel": "Yza",
+    "save": "Saýla"
+  },
+
+  "tabs": {
+    "profile": "Profil",
+    "notifications": "Bildirişler"
   }
 }

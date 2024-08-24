@@ -17,8 +17,11 @@ import {
   UploadLabel,
   UserDetails,
 } from "../styles/ProfileStyles";
+import { useTranslation } from "react-i18next";
 
 const Profile: React.FC = () => {
+  const { t } = useTranslation();
+
   const {
     avatar,
     firstName,
@@ -32,13 +35,15 @@ const Profile: React.FC = () => {
 
   return (
     <ProfileContainer>
-      <UserDetails>User Details</UserDetails>
+      <UserDetails>{t("profile.userDetails")}</UserDetails>
       <AvatarSection>
         <AvatarContainer>
           <Avatar size={100} src={avatar} />
         </AvatarContainer>
         <div>
-          <UploadLabel htmlFor="avatar-upload">Change Picture</UploadLabel>
+          <UploadLabel htmlFor="avatar-upload">
+            {t("profile.changePicture")}
+          </UploadLabel>
           <HiddenInput
             id="avatar-upload"
             type="file"
@@ -51,25 +56,27 @@ const Profile: React.FC = () => {
       <Row gutter={16}>
         <Col xs={24} sm={12}>
           <StyledInput
-            placeholder="First Name"
+            placeholder={t("profile.firstName")}
             value={firstName}
             onChange={handleFirstNameChange}
           />
         </Col>
         <Col xs={24} sm={12}>
           <StyledInput
-            placeholder="Surname"
+            placeholder={t("profile.surname")}
             value={surname}
             onChange={handleSurnameChange}
           />
         </Col>
       </Row>
-      <StyledInput placeholder="Email" />
-      <StyledTextArea placeholder="Share some information about you" rows={4} />
+      <StyledInput placeholder={t("profile.email")} />
+      <StyledTextArea placeholder={t("profile.about")} rows={4} />
       <HorizontalLine />
       <ActionButtonsContainer>
-        <CancelButton onClick={handleCancel}>Cancel</CancelButton>
-        <SaveButton onClick={handleSave}>Save</SaveButton>
+        <CancelButton onClick={handleCancel}>
+          {t("profile.cancel")}
+        </CancelButton>
+        <SaveButton onClick={handleSave}>{t("profile.save")}</SaveButton>
       </ActionButtonsContainer>
     </ProfileContainer>
   );

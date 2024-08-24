@@ -49,5 +49,21 @@
     "usagePeriod": "Usage Period",
     "status": "Status",
     "action": "Action"
+  },
+
+  "profile": {
+    "userDetails": "User Details",
+    "changePicture": "Change Picture",
+    "firstName": "First Name",
+    "surname": "Surname",
+    "email": "Email",
+    "about": "Share some information about you",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+
+  "tabs": {
+    "profile": "Profile",
+    "notifications": "Notifications"
   }
 }

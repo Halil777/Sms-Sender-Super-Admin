@@ -1,7 +1,9 @@
 import { notification } from "antd";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useProfileLogic = () => {
+  const navigate = useNavigate();
   const [avatar, setAvatar] = useState<string>(
     localStorage.getItem("profileAvatar") || "https://via.placeholder.com/100"
   );
@@ -62,11 +64,7 @@ export const useProfileLogic = () => {
   };
 
   const handleCancel = () => {
-    setFirstName(localStorage.getItem("firstName") || "");
-    setSurname(localStorage.getItem("surname") || "");
-    setAvatar(
-      localStorage.getItem("profileAvatar") || "https://via.placeholder.com/100"
-    );
+    navigate("/dashboard");
   };
 
   return {

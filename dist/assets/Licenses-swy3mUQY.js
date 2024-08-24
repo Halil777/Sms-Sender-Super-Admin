@@ -1,4 +1,4 @@
-import{j as e,d as n,u as l}from"./index-G9huiumW.js";import{P as d,U as p}from"./iconBase-BxP8R-DU.js";import{C as u,M as m}from"./CreateButton-CEBvbrNJ.js";import{a as x,A as f}from"./index-Cpxyp2YR.js";import{F as y}from"./Table-B8KY6zjQ.js";import"./index-_OVBo1d2.js";import"./omit-DXgDXInf.js";import"./Skeleton-KnheAWmZ.js";import"./index-DIY7wIMH.js";import"./index-CRJvrYZx.js";const h=()=>e.jsx("div",{children:e.jsx(d,{leftContent:e.jsx(p,{placeholder:"Search Licenses..."}),rightContent:e.jsx(u,{children:"Create New Licenses"})})}),g=n.div`
+import{j as e,d as n,u as l}from"./index-D76F0jWM.js";import{P as d,U as p}from"./iconBase-C734MoCI.js";import{C as u,M as m}from"./CreateButton-CfCxKxoR.js";import{a as x,A as f}from"./index-DQrEyCiv.js";import{F as y}from"./Table-DBACrPRq.js";import"./index-C1XnGqMB.js";import"./omit-DXgDXInf.js";import"./Skeleton-RKm2wVQv.js";import"./index-DSE13w5Z.js";import"./index-B3saixO9.js";const h=()=>e.jsx("div",{children:e.jsx(d,{leftContent:e.jsx(p,{placeholder:"Search Licenses..."}),rightContent:e.jsx(u,{children:"Create New Licenses"})})}),g=n.div`
   margin-top: 50px;
   background-color: #fff;
   padding: 15px;
