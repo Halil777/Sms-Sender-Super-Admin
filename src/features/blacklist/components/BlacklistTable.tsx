@@ -1,37 +1,14 @@
-import { FC } from "react";
-import styled from "styled-components";
-import { Table, Button, Modal } from "antd";
-import { AiFillDelete } from "react-icons/ai"; // Import delete icon
+import { FC, useState } from "react";
+import { Modal } from "antd";
+import { FaTrash } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-
-// Styled container for the table
-const TableContainer = styled.div`
-  padding: 20px;
-  border: 1px solid #e7e7e7;
-  border-radius: 6px;
-  background-color: #ffffff;
-  margin-top: 50px;
-  .ant-table-thead > tr > th {
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .ant-table-tbody > tr > td {
-    text-align: center;
-    background-color: #ffffff;
-  }
-
-  .delete-icon {
-    color: red;
-    cursor: pointer;
-    font-size: 18px;
-  }
-`;
+import { StyledTable } from "../../sms-logs/style/SmsStyle";
 
 const BlacklistTable: FC = () => {
   const { t } = useTranslation();
 
-  const dataSource = [
+  // Initial data for the blacklist
+  const initialData = [
     {
       key: "1",
       word: "example",
@@ -45,6 +22,27 @@ const BlacklistTable: FC = () => {
       date: "2024-08-22",
     },
   ];
+
+  const [data, setData] = useState(initialData);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState<any>(null);
+
+  // Function to show delete modal
+  const showDeleteModal = (record: any) => {
+    setSelectedRecord(record);
+    setIsModalVisible(true);
+  };
+
+  // Handle the deletion confirmation
+  const handleDelete = () => {
+    setData(data.filter((item) => item.key !== selectedRecord.key));
+    setIsModalVisible(false);
+  };
+
+  // Handle modal cancel
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   const columns = [
     {
@@ -65,48 +63,36 @@ const BlacklistTable: FC = () => {
     {
       title: t("blacklist.action"),
       key: "action",
-      render: (_: any, record: any) => (
-        <Button
-          icon={<AiFillDelete className="delete-icon" />}
-          onClick={() => showDeleteConfirm(record.key)}
-          type="text"
-        />
+      render: (_: unknown, record: any) => (
+        <>
+          <FaTrash
+            style={{ color: "red", cursor: "pointer" }}
+            onClick={() => showDeleteModal(record)}
+          />
+        </>
       ),
     },
   ];
 
-  // Function to show the delete confirmation popup
-  const showDeleteConfirm = (key: string) => {
-    Modal.confirm({
-      title: "Are you sure you want to delete this item?",
-      content: "This action cannot be undone.",
-      okText: "Yes",
-      okType: "danger",
-      cancelText: "No",
-      onOk() {
-        handleDelete(key);
-      },
-      onCancel() {
-        console.log("Cancel");
-      },
-    });
-  };
-
-  // Handle delete action
-  const handleDelete = (key: string) => {
-    console.log(`Delete record with key: ${key}`);
-    // Implement delete logic here, such as updating state or making an API call
-  };
-
   return (
-    <TableContainer>
-      <Table
-        dataSource={dataSource}
-        columns={columns}
-        pagination={false}
-        rowKey="key"
-      />
-    </TableContainer>
+    <>
+      <StyledTable dataSource={data} columns={columns} rowKey="key" />
+
+      <Modal
+        title={t("blacklist.confirmDeletion")}
+        visible={isModalVisible}
+        onOk={handleDelete}
+        onCancel={handleCancel}
+        okText={t("blacklist.delete")}
+        cancelText={t("blacklist.cancel")}
+      >
+        <p>
+          {t("blacklist.confirmDeleteMessage", {
+            word: selectedRecord?.word,
+          })}
+        </p>
+      </Modal>
+    </>
   );
 };
 

@@ -75,7 +75,6 @@ const SmsTable: FC<SmsTableProps> = ({ onRowClick }) => {
       <StyledTable
         dataSource={dataSource}
         columns={columns}
-        pagination={false}
         onRow={(record) => ({
           onClick: () => onRowClick(record),
         })}

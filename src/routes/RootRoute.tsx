@@ -14,6 +14,7 @@ const Dashboard = lazy(
   () => import("../features/dashboard/presentation/Dashboard")
 );
 const Clients = lazy(() => import("../features/clients/presentation/Clients"));
+
 const SmsLogs = lazy(() => import("../features/sms-logs/presentation/SmsLogs"));
 const BlackList = lazy(
   () => import("../features/blacklist/presentation/BlackList")
@@ -23,6 +24,12 @@ const ProfileSettings = lazy(
 );
 const Licenses = lazy(
   () => import("../features/license/presentation/Licenses")
+);
+
+const Pending = lazy(() => import("../features/pending/presentation/Pending"));
+
+const Templates = lazy(
+  () => import("../features/templates/presentation/Templates")
 );
 
 // Create a container for the layout
@@ -85,6 +92,16 @@ function RootRoute() {
                         </ProtectedRoute>
                       }
                     />
+
+                    <Route
+                      path="/templates"
+                      element={
+                        <ProtectedRoute>
+                          <Templates />
+                        </ProtectedRoute>
+                      }
+                    />
+
                     <Route
                       path="/clients"
                       element={
@@ -94,10 +111,18 @@ function RootRoute() {
                       }
                     />
                     <Route
-                      path="/licenses"
+                      path="/licences"
                       element={
                         <ProtectedRoute>
                           <Licenses />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/pending"
+                      element={
+                        <ProtectedRoute>
+                          <Pending />
                         </ProtectedRoute>
                       }
                     />

@@ -5,6 +5,7 @@ import {
   WarningOutlined,
   StopOutlined,
   PhoneOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
 import useDashboardData from "../hooks/useDashboardData";
 import { formatNumber } from "../logic/DashboardLogic";
@@ -51,6 +52,12 @@ const Dashboard: React.FC = () => {
             text={t("dashboard.phoneNumbers")} // Use translation
             count={data.phoneCount}
             delay={0.7}
+          />
+          <DashboardCard
+            icon={<MailOutlined />}
+            text={t("dashboard.pendingMessages")} // Use translation
+            count={data.pendingMessagesCount}
+            delay={0.9}
           />
         </>
       )}

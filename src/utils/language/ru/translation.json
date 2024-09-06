@@ -4,7 +4,8 @@
     "clients": "Клиенты",
     "smsLogs": "Журналы SMS",
     "blacklistWords": "Черный список слов",
-    "licenses": "Лицензии"
+    "licenses": "Лицензии",
+    "templates": "Шаблоны"
   },
 
   "lang": {
@@ -15,7 +16,8 @@
     "clients": "Клиенты",
     "danger": "Опасность",
     "blacklistWords": "Черные слова",
-    "phoneNumbers": "Количество телефонов"
+    "phoneNumbers": "Количество телефонов",
+    "pendingMessages": "Ожидающие сообщения"
   },
 
   "clients": {

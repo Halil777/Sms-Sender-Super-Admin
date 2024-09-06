@@ -4,7 +4,8 @@
     "clients": "Clients",
     "smsLogs": "SMS Logs",
     "blacklistWords": "Blacklist Words",
-    "licenses": "Licenses"
+    "licenses": "Licenses",
+    "templates": "Templates"
   },
 
   "lang": {
@@ -15,7 +16,8 @@
     "clients": "Clients",
     "danger": "Danger",
     "blacklistWords": "Blacklist Words",
-    "phoneNumbers": "Phone Count"
+    "phoneNumbers": "Phone Count",
+    "pendingMessages": "Pending Messages"
   },
 
   "clients": {

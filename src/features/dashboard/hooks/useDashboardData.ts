@@ -12,6 +12,7 @@ const useDashboardData = () => {
         dangerCount: 75,
         blacklistCount: 30,
         phoneCount: 450,
+        pendingMessagesCount: 122,
       };
       setData(staticData);
     };

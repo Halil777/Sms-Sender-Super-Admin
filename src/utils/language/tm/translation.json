@@ -4,7 +4,8 @@
     "clients": "Müşderiler",
     "smsLogs": "SMS Günlükleri",
     "blacklistWords": "Gadagan edilen sözler",
-    "licenses": "Lisenziýalar"
+    "licenses": "Lisenziýalar",
+    "templates": "Şablonlar"
   },
 
   "lang": {
@@ -15,7 +16,8 @@
     "clients": "Müşderiler",
     "danger": "Haryt",
     "blacklistWords": "Gadagan sözler",
-    "phoneNumbers": "Telefon sany"
+    "phoneNumbers": "Telefon sany",
+    "pendingMessages": "Garaşylýan hatlar"
   },
 
   "clients": {

@@ -1,34 +1,9 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { Table, Modal } from "antd";
-import { AiFillEdit, AiFillDelete } from "react-icons/ai"; // Import icons from react-icons
+import { Modal } from "antd";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-
-// Define styled components
-const TableContainer = styled.div`
-  margin-top: 50px;
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 8px;
-`;
-
-const ActionIcon = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin: 0 5px;
-
-  .edit-icon {
-    color: #1a54eb;
-    font-size: 18px;
-  }
-
-  .delete-icon {
-    color: red;
-    font-size: 18px;
-  }
-`;
+import { StyledTable } from "../../sms-logs/style/SmsStyle";
 
 const StatusDiv = styled.div<{ status: string }>`
   display: flex;
@@ -103,18 +78,16 @@ const LicensesTable: FC = () => {
     {
       title: t("license.action"),
       key: "action",
-      render: (_: any, record: any) => (
-        <div style={{ display: "flex" }}>
-          <ActionIcon className="edit-icon">
-            <AiFillEdit className="edit-icon" />
-          </ActionIcon>
-          <ActionIcon
-            className="delete-icon"
+      render: (_: unknown, record: any) => (
+        <>
+          <FaEdit
+            style={{ color: "blue", cursor: "pointer", marginRight: 10 }}
+          />
+          <FaTrash
             onClick={() => handleDelete(record.key)}
-          >
-            <AiFillDelete className="delete-icon" />
-          </ActionIcon>
-        </div>
+            style={{ color: "red", cursor: "pointer" }}
+          />
+        </>
       ),
     },
   ];
@@ -137,19 +110,9 @@ const LicensesTable: FC = () => {
       usagePeriod: "2024-01-01 to 2024-06-30",
       status: "pending",
     },
-    // Add more rows as needed
   ];
 
-  return (
-    <TableContainer>
-      <Table
-        columns={columns}
-        dataSource={data}
-        pagination={false}
-        rowKey="key"
-      />
-    </TableContainer>
-  );
+  return <StyledTable columns={columns} dataSource={data} rowKey="key" />;
 };
 
 export default LicensesTable;

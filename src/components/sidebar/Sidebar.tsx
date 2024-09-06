@@ -6,7 +6,9 @@ import {
   TeamOutlined,
   MessageOutlined,
   StopOutlined,
-  FileTextOutlined, // Import a new icon for Licenses
+  FileTextOutlined,
+  MailOutlined,
+  FileAddOutlined, // Added for Templates
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
@@ -84,6 +86,7 @@ const Sidebar: FC = () => {
         </IconWrapper>
         {t("sidebar.dashboard")}
       </MenuItem>
+
       <MenuItem
         to="/clients"
         className={({ isActive }) => (isActive ? "active" : "inactive")}
@@ -111,15 +114,33 @@ const Sidebar: FC = () => {
         </IconWrapper>
         {t("sidebar.blacklistWords")}
       </MenuItem>
-      {/* Add Licenses page to the sidebar */}
+      <MenuItem
+        to="/pending"
+        className={({ isActive }) => (isActive ? "active" : "inactive")}
+      >
+        <IconWrapper isActive={false}>
+          <MailOutlined />
+        </IconWrapper>
+        {t("dashboard.pendingMessages")}
+      </MenuItem>
       <MenuItem
         to="/licences"
         className={({ isActive }) => (isActive ? "active" : "inactive")}
       >
         <IconWrapper isActive={false}>
-          <FileTextOutlined /> {/* Icon for Licenses */}
+          <FileTextOutlined />
         </IconWrapper>
         {t("sidebar.licenses")}
+      </MenuItem>
+      <MenuItem
+        to="/templates"
+        className={({ isActive }) => (isActive ? "active" : "inactive")}
+      >
+        <IconWrapper isActive={false}>
+          <FileAddOutlined /> {/* Icon for Templates */}
+        </IconWrapper>
+        {t("sidebar.templates")}{" "}
+        {/* Assuming 'templates' is added to the translation context */}
       </MenuItem>
     </SidebarContainer>
   );

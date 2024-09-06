@@ -16,6 +16,7 @@ export const StyledTable = styled(Table)`
     color: #000000;
     text-align: center;
     background-color: transparent; /* Remove header background color */
+    margin-top: 50px;
   }
 
   .ant-table-tbody > tr > td {

@@ -3,4 +3,5 @@ export interface DashboardData {
   dangerCount: number;
   blacklistCount: number;
   phoneCount: number;
+  pendingMessagesCount: number;
 }

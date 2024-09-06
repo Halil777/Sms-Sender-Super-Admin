@@ -10,6 +10,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   padding: 0 20px;
   background-color: #fff;
+  margin-bottom: 50px;
 `;
 
 interface PageHeaderProps {
