@@ -5,6 +5,7 @@ import { UserOutlined } from "@ant-design/icons";
 import {
   AdminText,
   HeaderContainer,
+  LanguageContainer,
   LeftContainer,
   RightContainer,
   UserIconContainer,
@@ -49,7 +50,9 @@ const Header: FC = () => {
         <WelcomeText>Welcome back to {getPageName()}.</WelcomeText>
       </LeftContainer>
       <RightContainer>
-        <Language />
+        <LanguageContainer>
+          <Language />
+        </LanguageContainer>
         <UserIconContainer>
           {avatar ? (
             <Avatar
@@ -60,7 +63,7 @@ const Header: FC = () => {
             />
           ) : (
             <UserOutlined
-              style={{ fontSize: "24px", color: "#64748b" }}
+              style={{ color: "#64748b" }}
               onClick={() => navigate("/profile")}
             />
           )}

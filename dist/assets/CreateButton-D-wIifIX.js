@@ -1,4 +1,4 @@
-import{d as t,j as e}from"./index-CmCOnMul.js";const n=t.button`
+import{d as t,j as e}from"./index-CCnGCN1I.js";const n=t.button`
   width: 181px; /* Fixed width */
   height: 47px; /* Fixed height */
   border-radius: 6px; /* Border radius */
@@ -16,5 +16,11 @@ import{d as t,j as e}from"./index-CmCOnMul.js";const n=t.button`
 
   &:focus {
     outline: none; /* Remove default focus outline */
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 38px;
+    padding: 10px;
   }
 `,i=({onClick:o,children:r})=>e.jsx(n,{onClick:o,children:r});export{i as C};

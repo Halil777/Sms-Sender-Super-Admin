@@ -1,7 +1,6 @@
 import { Table } from "antd";
 import styled from "styled-components";
 
-// Styled component for the table container
 export const TableContainer = styled.div`
   margin-top: 50px; /* Adjust this value as needed */
 `;

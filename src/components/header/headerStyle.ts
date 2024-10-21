@@ -23,6 +23,13 @@ export const AdminText = styled.h5`
   line-height: 26px;
   color: #0e1217;
   margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    line-height: 16px;
+  }
 `;
 
 export const WelcomeText = styled.p`
@@ -32,6 +39,12 @@ export const WelcomeText = styled.p`
   line-height: 20px;
   color: #64748b;
   margin: 0;
+`;
+
+export const LanguageContainer = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const RightContainer = styled.div`
@@ -49,4 +62,11 @@ export const UserIconContainer = styled.div`
   border-radius: 50%;
   background-color: #f0f0f0;
   cursor: pointer;
+  font-size: 24px;
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
 `;

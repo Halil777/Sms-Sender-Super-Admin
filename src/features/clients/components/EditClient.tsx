@@ -1,32 +1,61 @@
-import { FC, useState } from "react";
-import { Modal, Select, message, Button } from "antd";
+import { FC, useState, useEffect } from "react";
+import { Drawer, Button, Select, message } from "antd";
 import axios from "axios";
 import {
   FooterButtons,
   FormContainer,
   InputField,
   Label,
-  ModalTitle,
 } from "../styles/createStyle";
 
-interface CreateClientProps {
+interface EditClientProps {
   visible: boolean;
-  onCancel: () => void;
-  onAdd: () => void;
+  onClose: () => void;
+  clientId: number;
+  onUpdate: () => void;
 }
 
-const CreateClient: FC<CreateClientProps> = ({ visible, onCancel, onAdd }) => {
+const EditClient: FC<EditClientProps> = ({
+  visible,
+  onClose,
+  clientId,
+  onUpdate,
+}) => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [phone, setPhone] = useState<number>(0);
   const [usagePeriod, setUsagePeriod] = useState("12 months");
   const [status, setStatus] = useState("");
+  const [password, setPassword] = useState("");
 
   const statusOptions = ["Active", "Passive", "Paused"];
 
-  const handleAddClient = async () => {
-    const newClient = {
+  useEffect(() => {
+    const fetchClientData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/clients/${clientId}`
+        );
+        const clientData = response.data;
+
+        setName(clientData.name);
+        setUsername(clientData.client_name);
+        setPhone(clientData.phone_count);
+        setUsagePeriod(clientData.usage_period);
+        setStatus(clientData.status);
+      } catch (error) {
+        console.error("Error fetching client data:", error);
+        message.error("Failed to fetch client data.");
+      }
+    };
+
+    if (clientId) {
+      fetchClientData();
+    }
+  }, [clientId]);
+
+  const handleUpdateClient = async () => {
+    const updatedClient = {
       name,
       client_name: username,
       phone_count: phone,
@@ -35,43 +64,33 @@ const CreateClient: FC<CreateClientProps> = ({ visible, onCancel, onAdd }) => {
       client_password: password,
     };
 
-    console.log("Adding client with data:", newClient);
-
     try {
-      await axios.post("http://localhost:3000/clients", newClient, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      message.success("Client added successfully!");
-      setName("");
-      setUsername("");
-      setPassword("");
-      setPhone(0);
-      setStatus("");
-      setUsagePeriod("12 months");
-      onAdd();
-      onCancel();
-    } catch (err) {
-      console.error("Error response:", (err as any)?.response);
-      message.error(
-        `Error adding client: ${
-          (err as any)?.response?.data?.message || (err as Error).message
-        }`
+      await axios.patch(
+        `http://localhost:3000/clients/${clientId}`,
+        updatedClient,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
+      message.success("Client updated successfully!");
+      onUpdate();
+      onClose();
+    } catch (error) {
+      console.error("Error updating client:", error);
+      message.error("Failed to update client.");
     }
   };
 
   return (
-    <Modal
-      title={<ModalTitle>Create New Client</ModalTitle>}
+    <Drawer
+      title={`Edit Client ${clientId}`}
+      placement="right"
+      closable={true}
+      onClose={onClose}
       visible={visible}
-      footer={null}
-      onCancel={onCancel}
-      width={680}
-      bodyStyle={{ padding: "20px" }}
-      style={{ top: 100 }}
+      width={500}
     >
       <FormContainer>
         <Label>Name</Label>
@@ -93,7 +112,7 @@ const CreateClient: FC<CreateClientProps> = ({ visible, onCancel, onAdd }) => {
           placeholder="Password"
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)} // Set password
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <Label>Phone</Label>
@@ -105,7 +124,7 @@ const CreateClient: FC<CreateClientProps> = ({ visible, onCancel, onAdd }) => {
 
         <Label>Usage Period</Label>
         <InputField
-          placeholder="Usage Period (e.g., 12 months)"
+          placeholder="Usage Period"
           value={usagePeriod}
           onChange={(e) => setUsagePeriod(e.target.value)}
         />
@@ -125,12 +144,12 @@ const CreateClient: FC<CreateClientProps> = ({ visible, onCancel, onAdd }) => {
         </Select>
       </FormContainer>
       <FooterButtons>
-        <Button type="primary" onClick={handleAddClient}>
-          Add Client
+        <Button type="primary" onClick={handleUpdateClient}>
+          Update Client
         </Button>
       </FooterButtons>
-    </Modal>
+    </Drawer>
   );
 };
 
-export default CreateClient;
+export default EditClient;

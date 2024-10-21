@@ -11,6 +11,7 @@ import {
   FileAddOutlined, // Added for Templates
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import Language from "../../utils/language/Language";
 
 // Container for the sidebar with added box-shadow
 const SidebarContainer = styled.div`
@@ -18,9 +19,13 @@ const SidebarContainer = styled.div`
   min-height: 100vh;
   background-color: #ffffff;
   padding-top: 20px;
-  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.1); /* Adjusted box shadow */
-  z-index: 100; /* Ensure it's above other elements if needed */
-  position: relative; /* Ensure it's positioned relative to its container */
+  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  position: relative;
+
+  @media (max-width: 768px) {
+    width: 60px;
+  }
 `;
 
 // Title at the top of the sidebar
@@ -31,6 +36,10 @@ const SidebarTitle = styled.div`
   line-height: 48px;
   color: #0e1217;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 // Menu items styling
@@ -61,6 +70,12 @@ const MenuItem = styled(NavLink)`
   }
 `;
 
+export const TitleLink = styled.h4`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 // Icon with conditional styling
 const IconWrapper = styled.span<{ isActive: boolean }>`
   .anticon {
@@ -68,6 +83,14 @@ const IconWrapper = styled.span<{ isActive: boolean }>`
       props.isActive
         ? "#1a54eb"
         : "#64748b"}; // Icon color based on active state
+  }
+`;
+
+export const LanguageContainer = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
   }
 `;
 
@@ -84,7 +107,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <HomeOutlined />
         </IconWrapper>
-        {t("sidebar.dashboard")}
+        <TitleLink>{t("sidebar.dashboard")}</TitleLink>
       </MenuItem>
 
       <MenuItem
@@ -94,7 +117,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <TeamOutlined />
         </IconWrapper>
-        {t("sidebar.clients")}
+        <TitleLink>{t("sidebar.clients")}</TitleLink>
       </MenuItem>
       <MenuItem
         to="/sms-logs"
@@ -103,7 +126,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <MessageOutlined />
         </IconWrapper>
-        {t("sidebar.smsLogs")}
+        <TitleLink>{t("sidebar.smsLogs")}</TitleLink>
       </MenuItem>
       <MenuItem
         to="/blacklist-words"
@@ -112,7 +135,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <StopOutlined />
         </IconWrapper>
-        {t("sidebar.blacklistWords")}
+        <TitleLink>{t("sidebar.blacklistWords")}</TitleLink>
       </MenuItem>
       <MenuItem
         to="/pending"
@@ -121,7 +144,7 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <MailOutlined />
         </IconWrapper>
-        {t("dashboard.pendingMessages")}
+        <TitleLink>{t("dashboard.pendingMessages")}</TitleLink>
       </MenuItem>
       <MenuItem
         to="/licences"
@@ -130,18 +153,20 @@ const Sidebar: FC = () => {
         <IconWrapper isActive={false}>
           <FileTextOutlined />
         </IconWrapper>
-        {t("sidebar.licenses")}
+        <TitleLink>{t("sidebar.licenses")}</TitleLink>
       </MenuItem>
       <MenuItem
         to="/templates"
         className={({ isActive }) => (isActive ? "active" : "inactive")}
       >
         <IconWrapper isActive={false}>
-          <FileAddOutlined /> {/* Icon for Templates */}
+          <FileAddOutlined />
         </IconWrapper>
-        {t("sidebar.templates")}{" "}
-        {/* Assuming 'templates' is added to the translation context */}
+        <TitleLink>{t("sidebar.templates")}</TitleLink>
       </MenuItem>
+      <LanguageContainer>
+        <Language />
+      </LanguageContainer>
     </SidebarContainer>
   );
 };

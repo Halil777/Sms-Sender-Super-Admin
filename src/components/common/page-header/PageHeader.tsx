@@ -11,6 +11,16 @@ const HeaderContainer = styled.div`
   padding: 0 20px;
   background-color: #fff;
   margin-bottom: 50px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
 `;
 
 interface PageHeaderProps {

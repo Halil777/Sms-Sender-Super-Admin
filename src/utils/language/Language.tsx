@@ -6,12 +6,18 @@ import { message } from "antd";
 const LanguageContainer = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    justify-content: center;
+  }
 `;
 
 const LanguageFlag = styled.img`
   width: 32px;
   height: 18px;
   margin-right: 8px;
+  cursor: pointer;
 `;
 
 const LanguageSelect = styled.select`
@@ -25,18 +31,25 @@ const LanguageSelect = styled.select`
   appearance: none;
   cursor: pointer;
   outline: none;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Language: FC = () => {
   const { i18n, t } = useTranslation();
   const [flagSrc, setFlagSrc] = useState("/flags/us.png");
+  const [languages] = useState(["en", "ru", "tm"]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Load the language from localStorage on component mount
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language") || "en";
     i18n.changeLanguage(savedLanguage);
     updateFlag(savedLanguage);
-  }, []);
+    setCurrentIndex(languages.indexOf(savedLanguage));
+  }, [i18n, languages]);
 
   const updateFlag = (language: string) => {
     switch (language) {
@@ -65,9 +78,21 @@ const Language: FC = () => {
     );
   };
 
+  // Handle language change on flag click for small screens
+  const handleFlagClick = () => {
+    const nextIndex = (currentIndex + 1) % languages.length;
+    const nextLanguage = languages[nextIndex];
+    setCurrentIndex(nextIndex);
+    changeLanguage(nextLanguage);
+  };
+
   return (
     <LanguageContainer>
-      <LanguageFlag src={flagSrc} alt="Selected Language Flag" />
+      <LanguageFlag
+        src={flagSrc}
+        alt="Selected Language Flag"
+        onClick={handleFlagClick}
+      />
       <LanguageSelect
         id="languageSelect"
         onChange={(e) => changeLanguage(e.target.value)}

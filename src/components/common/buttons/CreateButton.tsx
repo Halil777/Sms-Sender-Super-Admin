@@ -21,6 +21,12 @@ const StyledButton = styled.button`
   &:focus {
     outline: none; /* Remove default focus outline */
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 38px;
+    padding: 10px;
+  }
 `;
 
 // Props interface for the CreateButton component
